@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head> 
+        <meta charset="utf-8">
+        <title>설문조사 양식</title>
+    </head>
+    <body>
+        <header>
+            <h1>설문조사 양식</h1>
+            <p>모든 항목을 체크해주세요</p>
+        </header>
+        <hr/>
+        <main>
+            <form>
+                <fieldset>
+                    <legend>개인정보</legend>
+                    <label for="name">이름</label>
+                    <input type="text" name="name" id="name">
+                    <br>
+                    <label for="email">이메일</label>
+                    <input type="email" name="email" id="email">
+                </fieldset>
+                <fieldset>
+                    <legend>설문</legend>
+                    <p>연령대</p>
+                    <input type="radio" id="teen" name="age">
+                    <lable for ="teen">10대</lable>
+                    <input type="radio" id="twenty" name="age">
+                    <lable for ="twenty">20대</lable>
+                    <input type="radio" id="thirty" name="age">
+                    <lable for ="thirty">30대</lable>
+                    <input type="radio" id="fourty" name="age">
+                    <lable for ="fourty">40대</lable>
+
+                    <p>전공 여부</p>
+                    <input type="radio" id="yes" name="major">
+                    <lable for ="yes">전공자</lable>
+                    <input type="radio" id="no" name="major">
+                    <lable for ="no">비전공자</lable>
+
+                    <p>학원 선택 시 가장 중요하게 생각 하는 것은 ?</p>
+                    <input type="checkbox" id="position" name="academy">
+                    <lable for ="position">위치</lable>
+                    <input type="checkbox" id="teacher" name="academy">
+                    <lable for ="teacher">강사</lable>
+                    <input type="checkbox" id="money" name="academy">
+                    <lable for ="money">학원비</lable>
+                    <input type="checkbox" id="infra" name="academy">
+                    <lable for ="infra">시설</lable>
+                </fieldset>
+                <fieldset>
+                    <legend>기타 의견</legend>
+                    <textarea rows="3" cols="30" name="comment"></textarea>
+                </fieldset>
+                <input type="submit">
+            </form>
+        </main>
+        <hr>
+        <footer>
+            <p>입력하느라 수고하셨습니다.</p>
+        </footer>
+    </body>
+</html>
