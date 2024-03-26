@@ -89,13 +89,16 @@
 
       function deleteItem() {
         const checkBoxs = document.getElementsByClassName('form-check-input')
+        let deleteItems = []
         for (let i = 0; i < checkBoxs.length; i++) {
             let checkBox = checkBoxs.item(i);
-            console.log(checkBox.checked)
             if (checkBox.checked) {
-                checkBox.parentElement.parentElement.parentElement.remove()
+                deleteItems.push(checkBox)
             }
         }
+        deleteItems.forEach((item) => {
+            item.parentElement.parentElement.parentElement.remove()
+        }) 
       }
 
     </script>
