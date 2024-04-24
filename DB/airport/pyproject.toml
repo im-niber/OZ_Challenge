@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "airport"
+version = "0.1.0"
+description = ""
+authors = ["rbwo552 <rbwo552@naver.com>"]
+readme = "README.md"
+packages = [{include = "airport", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+faker = "^24.11.0"
+sqlalchemy = "^2.0.29"
+pymysql = "^1.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
