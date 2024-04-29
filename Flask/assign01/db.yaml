@@ -1,0 +1,1 @@
+dburl: 'mysql+pymysql://root:rbwo8160@localhost/flaskoz'

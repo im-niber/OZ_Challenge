@@ -2,13 +2,11 @@ from flask import Flask
 from flask_smorest import Api
 from db import db
 from flask import render_template
-from routes.board import board_blp
-from routes.users import user_blp
-from routes.users2 import user_blp2
+from routes.post  import post_blp
+import yaml
+
 app = Flask(__name__)
 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:rbwo8160@localhost/flaskoz'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # blueprint
@@ -20,22 +18,20 @@ app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
 app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
 api = Api(app)
-api.register_blueprint(board_blp)
-api.register_blueprint(user_blp2)
-api.register_blueprint(user_blp)
+api.register_blueprint(post_blp)
 
-@app.route('/manage-boards')
+@app.route('/manage-posts')
 def manage_boards():
-    return render_template('boards.html')
-
-@app.route('/manage-users')
-def manage_users():
-    return render_template('users.html')
-
+    return render_template('posts.html')
 
 if __name__ == '__main__':
+    with open('db.yaml') as f:
+        file = yaml.full_load(f)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = file['dburl']
+    db.init_app(app)
+    
     with app.app_context():
         db.create_all()
-        
-    db.init_app(app)
+
     app.run(debug=True)
