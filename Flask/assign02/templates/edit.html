@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Reservation</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Edit Reservation</h1>
+    <form method="post" action="/reservations/update/{{ reservation.id }}">
+        <label for="customer_name">Name:</label>
+        <input type="text" id="customer_name" name="customer_name" value="{{ reservation.customer_name }}" required>
+        <p></p>
+        <label for="customer_phone">Phone:</label>
+        <input type="text" id="customer_phone" name="customer_phone" value="{{ reservation.customer_phone }}" required>
+        <p></p>
+        <label for="reservation_time">Reservation Time:</label>
+        <input type="datetime-local" id="reservation_time" name="reservation_time" value="{{ reservation.reservation_time }}" required>
+        <p></p>
+        <label for="number_of_people">Number of People:</label>
+        <input type="number" id="number_of_people" name="number_of_people" value="{{ reservation.number_of_people }}" required>
+        <p></p>
+        <label for="special_requests">Special Requests:</label>
+        <textarea id="special_requests" name="special_requests">{{ reservation.special_requests }}</textarea>
+        <p></p>
+        <button type="submit">Update Reservation</button>
+    </form>
+</body>
+</html>
+

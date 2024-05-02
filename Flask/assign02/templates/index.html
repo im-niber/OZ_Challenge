@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Reservation System</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Restaurant Reservation System</h1>
+    <h2>Make a Reservation</h2>
+    <form method="post" action="/reservations">
+        <label for="customer_name">Name:</label>
+        <input type="text" id="customer_name" name="customer_name" required>
+        <label for="customer_phone">Phone:</label>
+        <input type="text" id="customer_phone" name="customer_phone" required>
+        <label for="reservation_time">Reservation Time:</label>
+        <input type="datetime-local" id="reservation_time" name="reservation_time" required>
+        <label for="number_of_people">Number of People:</label>
+        <input type="number" id="number_of_people" name="number_of_people" required>
+        <label for="special_requests">Special Requests:</label>
+        <textarea id="special_requests" name="special_requests"></textarea>
+        <button type="submit">Reserve</button>
+    </form>
+    <h2>Current Reservations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Time</th>
+                <th>People</th>
+                <th>Requests</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.customer_name }}</td>
+                <td>{{ reservation.customer_phone }}</td>
+                <td>{{ reservation.reservation_time }}</td>
+                <td>{{ reservation.number_of_people }}</td>
+                <td>{{ reservation.special_requests }}</td>
+                <td>
+                    <a href="/reservations/edit/{{ reservation.id }}">Edit</a>
+                    <a href="/reservations/delete/{{ reservation.id }}">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">No reservations found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

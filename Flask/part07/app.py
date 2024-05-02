@@ -5,11 +5,15 @@ from flask import render_template
 from routes.board import board_blp
 from routes.users import user_blp
 from routes.users2 import user_blp2
-app = Flask(__name__)
+from flask_migrate import Migrate
 
+app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:rbwo8160@localhost/flaskoz'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+migrate = Migrate(app, db)
 
 # blueprint
 app.config["API_TITLE"] = "My API"
@@ -36,6 +40,5 @@ def manage_users():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        
-    db.init_app(app)
+    
     app.run(debug=True)
