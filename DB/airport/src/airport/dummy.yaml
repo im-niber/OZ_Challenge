@@ -1,0 +1,42 @@
+airline:
+  count: 1000
+  is_truncated: true
+airplane:
+  count: 1000
+  is_truncated: true
+airplane_type:
+  count: 1000
+  is_truncated: true
+airport:
+  count: 1000
+  is_truncated: true
+airport_geo:
+  count: 1000
+  is_truncated: true
+airport_reachable:
+  count: 1000
+  is_truncated: true
+booking:
+  count: 1000
+  is_truncated: true
+employee:
+  count: 1000
+  is_truncated: true
+flight:
+  count: 1000
+  is_truncated: true
+flight_log:
+  count: 1000
+  is_truncated: true
+flightschedule:
+  count: 1000
+  is_truncated: true
+passenger:
+  count: 1000
+  is_truncated: true
+passengerdetails:
+  count: 1000
+  is_truncated: true
+weatherdata:
+  count: 1000
+  is_truncated: true
