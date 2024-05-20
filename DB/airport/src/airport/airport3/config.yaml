@@ -1,0 +1,3 @@
+mysql: "mysql+pymysql://root:rbwo8160@localhost/airportdb?charset=utf8mb4"
+postgresql: "postgresql://wrwer:werwer@loclal~~"
+oracle: "oracle://werwer:werwe:Rwerwer~"
