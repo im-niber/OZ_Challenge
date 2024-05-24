@@ -23,4 +23,5 @@ for item in adposts:
     if isAd != None and isAd.text == "광고":
         title = item.select(".title_link")
         name = item.select(".name")
-        print(title[0].text, name[0].text)
+        print(title[0].text)
+        print(name[0].text)

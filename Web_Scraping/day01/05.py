@@ -8,12 +8,10 @@ req = requests.get(base_url, headers=header_user)
 html = req.text
 
 soup = BeautifulSoup(html, "html.parser")
-lst50 = soup.select(".lst50")
-lst100 = soup.select(".lst100")
 
-lst_all = lst50 + lst100
+lst = soup.find_all(class_=["lst50","lst100"])
 
-for rank, i in enumerate(lst_all, 1):
+for rank, i in enumerate(lst, 1):
     title = i.select_one(".ellipsis.rank01 a")
     singer = i.select_one(".ellipsis.rank02 a")
     album = i.select_one(".ellipsis.rank03 a")
