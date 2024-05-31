@@ -10,5 +10,7 @@ class Board(CommonModel):
     likes = models.PositiveIntegerField(default=0)
     reviews = models.PositiveIntegerField(default=0)
 
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+
     def __str__(self) -> str:
         return self.title
