@@ -1,8 +1,9 @@
 from django.db import models
+from common.models import CommonModel
 
 # Create your models here.
-class Address(models.Model):
-    user = models.ForeignKey('account.Account',on_delete=models.CASCADE)
+class Address(CommonModel):
+    user = models.ForeignKey('users.User',on_delete=models.CASCADE)
 
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=100)

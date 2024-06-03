@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ("testcol", "username", "email", "first_name", "last_name", "is_staff", "is_business", "grade")
+    list_display = ("username", "email", "first_name", "last_name", "is_staff", "is_business", "grade")
     # fieldsets = (
     #     (None, {"fields": ("username", "password", "is_business")}),
     # )
