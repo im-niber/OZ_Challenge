@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Feed
 from users.serializers import FeedUserSerializer
+from reviews.serializers import ReviewSerializer
 
 class FeedSerializer(ModelSerializer):
 
@@ -10,6 +11,8 @@ class FeedSerializer(ModelSerializer):
     # 다른 foreignkey 필드가 있으면 다르겠지만
 
     user = FeedUserSerializer(read_only=True)
+    review_set = ReviewSerializer(many=True, read_only=True)
+
     class Meta:
         model = Feed
         fields = "__all__"

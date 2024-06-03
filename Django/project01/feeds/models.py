@@ -10,3 +10,4 @@ class Feed(CommonModel):
     content = models.CharField(max_length=120)
 
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    # reviews = models.ForeignKey("reviews.Review", on_delete=models.CASCADE)

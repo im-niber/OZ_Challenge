@@ -4,6 +4,11 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, ParseError
 from django.contrib.auth.password_validation import validate_password
 
+# 사용자 인증
+from rest_framework.authentication import TokenAuthentication
+# 권한 부여
+from rest_framework.permissions import IsAuthenticated
+
 from addresses.serializers import AddressSerializer
 from .serializers import MyInfoUserSerializer
 from .models import User
@@ -58,8 +63,24 @@ class UserAddress(APIView):
             return Response(serializer.errors)
         
 class MyInfo(APIView):
-    def get(self, request):
-        pass
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    def put(sefl, request):
-        pass
+    def get(self, request):
+        user = request.user
+        serializer = MyInfoUserSerializer(user)
+
+        return Response(serializer.data)
+
+    def put(self, request):
+        user = request.user
+        serializer = MyInfoUserSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            user = serializer.save()
+            serializer = MyInfoUserSerializer(user)
+
+            return Response(serializer.data)
+        
+        else:
+            return Response(serializer.errors)
