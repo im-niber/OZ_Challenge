@@ -56,3 +56,10 @@ class UserAddress(APIView):
         
         else:
             return Response(serializer.errors)
+        
+class MyInfo(APIView):
+    def get(self, request):
+        pass
+
+    def put(sefl, request):
+        pass
