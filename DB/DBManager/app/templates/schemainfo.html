@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스키마의 테이블 정보</title>
+</head>
+<body>
+    <h2> 테이블 정보 </h2>
+    <form action="/table_detail" method="get">
+        {% for table in datas["tables"] %}
+        <input type="submit" name="table" value="{{ table }}" />
+        {% endfor %}
+    </form>
+
+    <h2> 뷰 정보 </h2>
+    <form action="/view_detail" method="get">
+        {% for view in datas["views"] %}
+        <input type="submit" name="view" value="{{ view }}" />
+        {% endfor %}
+    </form>
+    
+</body>
+</html>

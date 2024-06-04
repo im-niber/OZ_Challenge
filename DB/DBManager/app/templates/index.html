@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> DB 관리</title>
+  </head>
+  <body>
+
+      <form id="db_Form" method = "post" action = '/db'>
+          <div>
+            <label for="db_name">DB list</label>
+              <select id="db" name="db" required>
+                {% for db in db_list %}
+                <option value= "{{ db_list[db] }}" >{{ db }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">선택하기</button>
+    </form>
+  </body>
+</html>

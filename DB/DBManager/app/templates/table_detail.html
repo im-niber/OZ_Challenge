@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> 컬럼 정보 </h2>
+
+        {% for col in datas["columns"] %}
+        <article> {{ col }} </article>
+        {% endfor %}
+
+    <h2> 코멘트 정보 </h2>
+    <article> {{ datas["comments"] }} </article>
+
+    <h2> 테이블 DDL </h2>
+    <article> {{ datas["ddl"] }}</article>
+
+
+    <h2>더미 데이터 생성</h2>
+    <form action="{{ url_for('main.set_dummy', table=request.args.get('table'), back=request.referrer) }}" method="post">
+    <div>
+        <label for="count">데이터 수</label>
+        <input type="number" id="count" name="count">
+    </div>
+    <div>
+        <label for="truncate">기존 데이터 삭제 여부</label>
+        <input type="checkbox" id="truncate" name="truncate">
+    </div>
+    <div>
+        <button type="submit">생성</button>
+    </div>
+    </form>
+
+    <script>
+        var currentUrl = window.location.href;
+        currentUrl = currentUrl.split("table=");
+        table_name = currentUrl[1];
+
+        var inputElement = document.getElementById('tableInput');
+        inputElement.value = table_name;
+    </script>
+
+</body>
+</html>

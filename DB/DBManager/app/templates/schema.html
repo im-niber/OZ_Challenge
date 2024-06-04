@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기능</title>
+</head>
+<body>
+    <h2> 조회할 스키마를 눌러주세요</h2>
+
+        <form action="/set_schema" method="get">
+            {% for schema in schemas %}
+            <input type="submit" name="schema" value="{{ schema }}" />
+            {% endfor %}
+        </form>
+        
+</body>
+</html>
