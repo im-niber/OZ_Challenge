@@ -45,7 +45,8 @@ CUSTOM_USER_APPS = [
     'addresses.apps.AddressesConfig',
     'reviews.apps.ReviewsConfig',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt'
 ]
 
 # 분리
@@ -137,8 +138,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
 
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication', # 추가
+#     ],
+# }
+
+# JWT 방식
+# 순서가 의미하는 바는 기본적으로 앞에거를 적용하고, 없다면 아래거를 적용시킨다는 의미.
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication', # 추가
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'config.authentication.JWTAuthentication', # 추가
     ],
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+    "SIGNING_KEY": "SECRET",
+    "ALGORITHM": "HS256",
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }

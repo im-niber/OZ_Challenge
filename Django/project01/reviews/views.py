@@ -16,7 +16,7 @@ class Reviews(APIView):
     
     def post(self, request):
         serializer = ReviewSerializer(data=request.data)
-        review = serializer.save(user=request.user, feed=request.feed)
+        review = serializer.save(user=request.user)
         
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
