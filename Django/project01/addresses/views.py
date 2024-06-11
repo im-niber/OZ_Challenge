@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.views import APIView
+from rest_framework.views import APIView, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from .models import Address
@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class Addresses(APIView):
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     # 모든 주소 정보 조회
     def get(self, request):
@@ -20,8 +20,19 @@ class Addresses(APIView):
 
         return Response(serializer.data)
     
+    def post(self, request):
+        serializer = AddressSerializer(data=request.data)
+
+        if serializer.is_valid():
+            address = serializer.save(user=request.user)
+            serializer = AddressSerializer(address)        
+            
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors)
+        
 class AddressDetail(APIView):
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get_object(self, address_id):
@@ -50,5 +61,4 @@ class AddressDetail(APIView):
             return Response({'error' : 'not found'})
         address.delete()
 
-
-        return Response({ "success delete"})
+        return Response({ "success delete" }, status.HTTP_204_NO_CONTENT)

@@ -26,7 +26,8 @@ class FeedSerializer(ModelSerializer):
 class FeedDetailSerializer(ModelSerializer):
     class Meta:
         model = Feed
-        fields = ('id', 'content')
+        # fields = ('id', 'content')
+        fields = "__all__"
 
 # 일부 데이터만 보여주는 Serialize
 
