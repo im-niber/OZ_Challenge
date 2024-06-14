@@ -8,6 +8,8 @@ jobs: # 어떤 일을 할건지
   test-lint: 
     name: Test and Lint
     runs-on: ubuntu-20.04 # 어디서 돌릴것인가 ? 어떤 환경 ?
+    env:
+          working-directory: ./django-project-youtube
     steps: # 작업 단계
       - name: Login in to Docker Hub
         uses: docker/login-actoin@v1 # 깃허브에서 제공하는 로그인 모듈
