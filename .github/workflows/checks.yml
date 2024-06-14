@@ -24,8 +24,8 @@ jobs: # 어떤 일을 할건지
       - name: Run Test-Code
       # 이때는 uses가 아닌, 모듈을 사용하는게 아니라 도커에 들어온 상태이고 코드에서 테스트를 하기위해 run.
         run: docker-compose run --rm app sh -c 'python manage.py test'
-        # working-directory: ${{ env.working-directory }}
+        working-directory: ${{ env.working-directory }}
       
       - name: Run Flake8 for Linting # pep8 style guide를 잘 준수하고 있는지 체크
         run: docker-compose run --rm app sh -c 'flake8'
-        # working-directory: ${{ env.working-directory }}
+        working-directory: ${{ env.working-directory }}
