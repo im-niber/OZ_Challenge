@@ -1,4 +1,4 @@
-version: "3.11"
+# version: "3.11" 이 부분은 docker compose 2.25 이상 부터는 필요없다고 한다.
 services:
   app:
     build:
