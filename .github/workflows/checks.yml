@@ -12,11 +12,11 @@ jobs: # 어떤 일을 할건지
       working-directory: ./Django/django-project-youtube
 
     steps: # 작업 단계
-      - name: Login in to Docker Hub
-        uses: docker/login-action@v1 # 깃허브에서 제공하는 로그인 모듈
-        with: # 저번에 레포지토리에 저장한 토큰과 아이디를 같이 보내줌
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Login in to Docker Hub
+      #   uses: docker/login-action@v1 # 깃허브에서 제공하는 로그인 모듈
+      #   with: # 저번에 레포지토리에 저장한 토큰과 아이디를 같이 보내줌
+      #     username: ${{ secrets.DOCKERHUB_USER }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Check Out - pull repostirty code # Github에 있는 코드를 작업 환경으로 가져오는 역할
         uses: actions/checkout@v2 # 이것도 깃허브에서 제공하는 모듈 우리가 작성한 코드를 불러올 수 이씀
