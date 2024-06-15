@@ -2,7 +2,7 @@
 ---
 name: Checks # Workflow 이름
 
-on: [push] # 어떤 액션을 받으면 활성화해줄지? 여기에선 git push 이벤트.
+on: [pull_request] # 어떤 액션을 받으면 활성화해줄지? push로 작성하면 푸쉬할 때 트리거된다
 
 jobs: # 어떤 일을 할건지
   test-lint: 

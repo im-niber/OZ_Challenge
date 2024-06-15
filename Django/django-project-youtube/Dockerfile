@@ -24,10 +24,19 @@ ARG DEV=false
 RUN python -m venv /py && \ 
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /tmp/requirements.txt && \
+    # 장고와 db를 연결하기 위한 커넥터를 설치해줌
+    apk add --update --no-cache postgresql-client jpeg-dev && \
+    # virtual 뒤 경로에 앞으로 설치할 패키지들을 저장하라는 명령어, &&를 작성하지 않아서 아래 두줄은
+    # 한줄이라고 보면된다. &&: 엔터키라고보면댐
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        # 아래 라이브러리들을 넘겨줌
+        build-base postgresql-dev musl-dev zlib-dev linux-headers && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    # 항상 도커 컨테이너를 최적화하는게 중요하기 때문에 del 명령어도 작성해줌.
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \

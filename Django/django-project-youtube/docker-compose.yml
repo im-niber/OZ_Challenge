@@ -10,3 +10,20 @@ services:
     volumes:
       - ./app:/app
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=youtube
+      - DB_USER=rbwo
+      - DB_PASS=password123
+    # 아래 db가 준비가 되면 컨테이너를 실행하라는 의존성을 명시해줌
+    depends_on:
+      - db
+
+  db: # PostgreSQL Database
+    image: postgresql:16-alpine
+    volumes: # 콜론이 들어가게 되면 해당 파일을 다음 경로로 옮긴다는 의미
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=youtube
+      - POSTGRES_USER=rbwo
+      - POSGGRES_PASSWORD=password123
