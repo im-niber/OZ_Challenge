@@ -21,7 +21,7 @@ def init_driver():
     options.add_experimental_option('excludeSwitches', ['disable-popup-blocking', 'enable-automation'])  # Disable popup
     options.add_argument("window-size=800,1280")  # Set window size
     options.add_argument("incognito")  # Secret mode
-    # options.add_argument("--headless") # Run in background
+    options.add_argument("--headless") # Run in background
     options.add_argument("--mute-audio")  # Mute audio
     options.add_argument(f"user-agent={user_info}")
 
@@ -69,10 +69,11 @@ def get_live_details(driver):
     soup = BeautifulSoup(page, "html.parser")
 
     thumbnail_list = [img['src'] for yt_image in soup.find_all("yt-image") for img in yt_image.find_all("img") if 'src' in img.attrs]
+    link_list = [link.get('href') for link in soup.find_all("a", class_="yt-simple-endpoint inline-block style-scope ytd-thumbnail") if link.get('href')]
     title_list = [title.text for title in soup.find_all("yt-formatted-string", id="video-title")]
     channel_name_list = [channel_name.text for text_container in soup.find_all("div", {"id": "text-container"}) for channel_name in text_container.find_all('a')]
     live_viewers_list = [viewers.text for viewers in soup.find_all("span", class_="inline-metadata-item style-scope ytd-video-meta-block")]
-    return thumbnail_list, title_list, channel_name_list, live_viewers_list
+    return thumbnail_list, link_list, title_list, channel_name_list, live_viewers_list
 
 def main(driver):
     url = "https://www.youtube.com/channel/UC4R8DWoMoI7CAwX8_LjQHig"
@@ -82,9 +83,16 @@ def main(driver):
     try:
         press_show_all(driver)
         scroll(driver)
-        thumbnail_list, title_list, channel_name_list, live_viewers_list = get_live_details(driver)
-        print(len(thumbnail_list), len(title_list), len(channel_name_list), len(live_viewers_list))
-    
+        thumbnail_list, link_list, title_list, channel_name_list, live_viewers_list = get_live_details(driver)
+        print(len(thumbnail_list), len(link_list), len(title_list), len(channel_name_list), len(live_viewers_list))
+        
+        youtube = "https://www.youtube.com/"
+        cnt = 0
+
+        for idx, link in enumerate(link_list):
+            link = youtube + link
+            print(idx, link)
+             
         # for idx, thumbnail in enumerate(thumbnail_list):
         #     print(idx, thumbnail)
 

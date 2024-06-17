@@ -79,6 +79,7 @@ def get_live_details(driver: WebDriver):
     titles: List = []
     channel_names: List = []
     live_viewers: List = []
+    links: List = []
 
     for thumbnail, title, channel_name, live_viewer in zip(
         soup.find_all("div", class_="thumbs-box"),
@@ -86,6 +87,9 @@ def get_live_details(driver: WebDriver):
         soup.find_all("a", class_="nick"),
         soup.find_all("span", class_="views"),
     ):
+        link_elm = thumbnail.find("a")
+        if link_elm.get('href'):
+            links.append(link_elm['href'])
 
         img = thumbnail.find("img")
         if img and 'src' in img.attrs:
@@ -97,7 +101,7 @@ def get_live_details(driver: WebDriver):
         if em:
             live_viewers.append(live_viewer.text)
 
-    return thumbnails, titles, channel_names, live_viewers
+    return thumbnails, links, titles, channel_names, live_viewers
 
 
 def main(driver: WebDriver):
@@ -109,8 +113,11 @@ def main(driver: WebDriver):
         # 페이지 조금만 내려주기 (아프리카TV에서 이미 인기순으로 정렬해서 제공하므로 적당히만 내려주면 된다.)
         scroll(driver)
 
-        thumbnail_list, title_list, channel_name_list, live_viewers_list = get_live_details(driver)
+        thumbnail_list, link_list, title_list, channel_name_list, live_viewers_list = get_live_details(driver)
         for i, el in enumerate(thumbnail_list):
+            print(f"{i}th: {el}")
+
+        for i, el in enumerate(link_list):
             print(f"{i}th: {el}")
 
         for i, el in enumerate(title_list):
