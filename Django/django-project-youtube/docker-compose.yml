@@ -9,7 +9,11 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
-    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
     environment:
       - DB_HOST=db
       - DB_NAME=youtube
@@ -20,10 +24,10 @@ services:
       - db
 
   db: # PostgreSQL Database
-    image: postgresql:16-alpine
-    volumes: # 콜론이 들어가게 되면 해당 파일을 다음 경로로 옮긴다는 의미
+    image: postgres:16-alpine
+    volumes: # 아래 콜론의 의미는 앞의 경로로 뒤의 경로의 파일을 옮긴다는 의미
       - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=youtube
       - POSTGRES_USER=rbwo
-      - POSGGRES_PASSWORD=password123
+      - POSTGRES_PASSWORD=password123
