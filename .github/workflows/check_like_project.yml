@@ -8,17 +8,18 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       working-directory: ./Django/list_exam
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: 1234
-      DB_DATABASE: oz_django
+      # DB_HOST: 127.0.0.1
+      # DB_PORT: 3306
+      # DB_USER: root
+      # DB_PASSWORD: 1234
+      # DB_DATABASE: oz_django
     steps:
       - name: Check out the codes
         uses: actions/checkout@v2
-
-      - name: Setup python environment
-        id: setup-python
+        
+      - name: Install Poetry
+        run: pipx install poetry
+      - id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: 3.12
