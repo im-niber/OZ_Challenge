@@ -19,6 +19,7 @@ jobs:
         
       - name: Install Poetry
         run: pipx install poetry
+        working-directory: ${{ env.working-directory }}
       - id: setup-python
         uses: actions/setup-python@v5
         with:
