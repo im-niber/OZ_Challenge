@@ -15,7 +15,7 @@ DJANGO_SYSTEM_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'core'
 ]
 
 CUSTOM_USER_APPS = [
