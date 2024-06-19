@@ -7,7 +7,7 @@ jobs:
   ci:
     runs-on: ubuntu-20.04
     env:
-      working-directory: ./Django/list_exam
+      working-directory: Django/list_exam
       # DB_HOST: 127.0.0.1
       # DB_PORT: 3306
       # DB_USER: root
@@ -19,7 +19,7 @@ jobs:
         
       - name: Install Poetry
         run: pipx install poetry
-        working-directory: ${{ env.working-directory }}
+
       - id: setup-python
         uses: actions/setup-python@v5
         with:
