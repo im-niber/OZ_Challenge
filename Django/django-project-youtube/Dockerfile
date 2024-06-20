@@ -15,15 +15,16 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
+COPY ./scripts /scripts
 
 WORKDIR /app
 EXPOSE 8000
 
+# 개발환경인지 아닌지를 나타냄
 ARG DEV=false
-
+RUN apk add --update --no-cache libffi-dev
 RUN python -m venv /py && \ 
     /py/bin/pip install --upgrade pip && \
-    /py/bin/pip install -r /tmp/requirements.txt && \
     # 장고와 db를 연결하기 위한 커넥터를 설치해줌
     apk add --update --no-cache postgresql-client jpeg-dev && \
     # virtual 뒤 경로에 앞으로 설치할 패키지들을 저장하라는 명령어, &&를 작성하지 않아서 아래 두줄은
@@ -31,6 +32,7 @@ RUN python -m venv /py && \
     apk add --update --no-cache --virtual .tmp-build-deps \
         # 아래 라이브러리들을 넘겨줌
         build-base postgresql-dev musl-dev zlib-dev linux-headers && \
+    /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
@@ -40,8 +42,14 @@ RUN python -m venv /py && \
     adduser \
         --disabled-password \
         --no-create-home \
-        django-user
-
-ENV PATH="/py/bin:$PATH"
-
-USER django-user
+        django-user && \
+    mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
+    chown -R django-user:django-user /vol && \
+    chmod -R 755 /vol && \
+    # 스크립트 실행 권한 부여
+    chmod -R +x /scripts
+    
+    ENV PATH="/scripts:/py/bin:$PATH"
+    USER django-user
+    CMD ["run.sh"]
