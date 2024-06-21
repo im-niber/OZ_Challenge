@@ -20,7 +20,7 @@ services:
     restart: always
     volumes:
       - postgres-data:var/lib/postgresql/data
-      - ./data/db:/var/lib/postgresql/data
+      - ./data/db:var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -36,7 +36,7 @@ services:
       # - 80:8000 # ec2-123-123-123.com/api/v1 (from:to)
       # - 8000:8000 # local
     volumes:
-      -static-data:/vol/static
+      - static-data:/vol/static
 
 volumes:
   postgres-data:
