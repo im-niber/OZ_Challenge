@@ -19,6 +19,7 @@ DJANGO_SYSTEM_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'core'
 ]
 
@@ -29,7 +30,8 @@ CUSTOM_USER_APPS = [
     'reactions.apps.ReactionsConfig',
     'subscriptions.apps.SubscriptionsConfig',
     'rest_framework',
-    'drf_spectacular'
+    'drf_spectacular',
+    'chat.apps.ChatConfig'
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
@@ -67,6 +69,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'
+ASGI_APPLICATION = 'app.routes.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
 
 
 # Database

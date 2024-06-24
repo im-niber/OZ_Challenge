@@ -3,3 +3,5 @@ djangorestframework>=3.14.0,<4.0.0
 psycopg2-binary>=2.9.9,<3.0.0 # PostgreSQL connector
 drf-spectacular>=0.27.2,<0.28.0
 uwsgi>=2.0.24,<2.1.0 # uWSGI
+channels>=4.0.0,<4.0.9
+daphne>=4.1.0,<4.2.0
