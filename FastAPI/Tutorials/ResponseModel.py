@@ -151,4 +151,36 @@ async def get_portal(teleport: bool = False) -> Response | dict:
 
 """
 응답 모델 파라미터
+
+기본 값을 가질 수 있슴니다
+
+만약 기본 값을 포함하고 싶지 않다면 response_model_exclude_unset를 True로 할당합니다
+
+"""
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float = 10.5
+    tags: list[str] = []
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+@app.get("/items/{item_id}", response_model=Item, response_model_exclude_unset=True)
+async def read_item(item_id: str):
+    return items[item_id]
+
+
+"""
+response_model_include and response_model_exlude
+
+데코레이터 매개변수로 포함하거나 제외한 파라미터를 정할 수 있는데
+권장하는 방식은 여러 클래스를 사용해서 하는 방식을 권장함니다. 위의 베이스 유저를 만들고
+출력따로 만드는 것처럼요
+
+권장하는 이유로는, OpenAPI에서 생성된 JSON 스키마가 여전히 전체 모델에 대한 스키마가 되기 때문이라고하네요
 """
